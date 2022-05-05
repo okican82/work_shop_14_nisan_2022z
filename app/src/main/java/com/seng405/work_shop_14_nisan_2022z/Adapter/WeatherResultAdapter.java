@@ -1,5 +1,7 @@
 package com.seng405.work_shop_14_nisan_2022z.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.seng405.work_shop_14_nisan_2022z.Activities.WaetherDetailActivity;
 import com.seng405.work_shop_14_nisan_2022z.Entity.Result;
 import com.seng405.work_shop_14_nisan_2022z.R;
 
@@ -14,6 +17,7 @@ import java.util.List;
 
 public class WeatherResultAdapter extends RecyclerView.Adapter<WeatherResultAdapter.ViewHolder> {
     private List<Result> weatherResultList;
+    private Result result;
 
     public WeatherResultAdapter(List<Result> weatherResultList) {
         this.weatherResultList = weatherResultList;
@@ -29,7 +33,7 @@ public class WeatherResultAdapter extends RecyclerView.Adapter<WeatherResultAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Result result = weatherResultList.get(position);
+        result = weatherResultList.get(position);
 
         holder.date_textview.setText(result.getDate());
         holder.status_textview.setText(result.getStatus());
@@ -40,11 +44,12 @@ public class WeatherResultAdapter extends RecyclerView.Adapter<WeatherResultAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navigateDetailActivity(v.getContext());
             }
         });
-
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -67,6 +72,14 @@ public class WeatherResultAdapter extends RecyclerView.Adapter<WeatherResultAdap
             degree_textview = v.findViewById(R.id.degree_textview);
 
         }
+    }
+
+    private void navigateDetailActivity(Context context)
+    {
+        Intent intent = new Intent(context, WaetherDetailActivity.class);
+
+        intent.putExtra("result",result);
+        context.startActivity(intent);
     }
 
 }

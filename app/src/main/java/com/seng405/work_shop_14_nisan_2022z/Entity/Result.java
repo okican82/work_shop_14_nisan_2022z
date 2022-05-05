@@ -1,10 +1,13 @@
 package com.seng405.work_shop_14_nisan_2022z.Entity;
 
-
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class Result implements Parcelable
+{
 
     @SerializedName("date")
     @Expose
@@ -36,6 +39,35 @@ public class Result {
     @SerializedName("humidity")
     @Expose
     private String humidity;
+    public final static Creator<Result> CREATOR = new Creator<Result>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Result createFromParcel(android.os.Parcel in) {
+            return new Result(in);
+        }
+
+        public Result[] newArray(int size) {
+            return (new Result[size]);
+        }
+
+    }
+            ;
+
+    protected Result(android.os.Parcel in) {
+        this.date = ((String) in.readValue((String.class.getClassLoader())));
+        this.day = ((String) in.readValue((String.class.getClassLoader())));
+        this.icon = ((String) in.readValue((String.class.getClassLoader())));
+        this.description = ((String) in.readValue((String.class.getClassLoader())));
+        this.status = ((String) in.readValue((String.class.getClassLoader())));
+        this.degree = ((String) in.readValue((String.class.getClassLoader())));
+        this.min = ((String) in.readValue((String.class.getClassLoader())));
+        this.max = ((String) in.readValue((String.class.getClassLoader())));
+        this.night = ((String) in.readValue((String.class.getClassLoader())));
+        this.humidity = ((String) in.readValue((String.class.getClassLoader())));
+    }
 
     public Result() {
     }
@@ -118,6 +150,23 @@ public class Result {
 
     public void setHumidity(String humidity) {
         this.humidity = humidity;
+    }
+
+    public void writeToParcel(android.os.Parcel dest, int flags) {
+        dest.writeValue(date);
+        dest.writeValue(day);
+        dest.writeValue(icon);
+        dest.writeValue(description);
+        dest.writeValue(status);
+        dest.writeValue(degree);
+        dest.writeValue(min);
+        dest.writeValue(max);
+        dest.writeValue(night);
+        dest.writeValue(humidity);
+    }
+
+    public int describeContents() {
+        return 0;
     }
 
 }

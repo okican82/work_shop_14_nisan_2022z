@@ -48,7 +48,7 @@ public class WeatherListActivity extends AppCompatActivity {
             cityName = bundle.getString("city_name");
         }
 
-        getWeatherListFromNetwork();
+        getWeatherListFromNetwork(cityName);
 
         // network data alınacak.
 
@@ -57,12 +57,12 @@ public class WeatherListActivity extends AppCompatActivity {
 
     }
 
-    private void getWeatherListFromNetwork()
+    private void getWeatherListFromNetwork(String cityName)
     {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=ankara")
+                .url("https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=" + cityName)
                 .method("GET", null)
                 .addHeader("authorization", "apikey 2Stxlk4jSx7jEwkTpUOGi9:2hTZLp49lZk7vzGNpf3ccy")
                 .addHeader("content-type", "application/json")
@@ -87,14 +87,7 @@ public class WeatherListActivity extends AppCompatActivity {
                         }
                     });
 
-
-
-
-
                     // recycleer view içerisinde kullanacağım data kaynağı weatherResult result değişkeni.
-
-
-
 
                     Log.d(TAG, "onResponse: ");
                 }
